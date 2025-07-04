@@ -21,11 +21,6 @@ Um pequeno projeto em Python que imprime, valida e (em breve) resolve quebra‑c
 ## 🔧 Pré‑requisitos
 
 - Python ≥ 3.9
-- [Colorama](https://pypi.org/project/colorama/) (opcional, mas recomendado para cores no Windows):
-
-```bash
-pip install colorama
-```
 
 ## 🚀 Como executar
 
