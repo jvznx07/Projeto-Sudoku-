@@ -35,6 +35,7 @@ def leitor_txt(pos_preenchidas):
     pos_preenchidas atualizada com os valores lidosno seguinte formato:
     [coluna,linha, valor em vermelho]
     """
+    nums_lidos = 0
     with open('arq_01_cfg.txt','r') as file:
         leitura = []
         #lista contendo a leitura completa
@@ -45,13 +46,15 @@ def leitor_txt(pos_preenchidas):
 
         for i in range(len(leitura)):
             
-            aux = [ler_colunas(leitura[i][0]),int(leitura[i][2]) - 1,"\033[31m" + str(leitura[i][5]) + "\033[0m"]
+            aux = [ler_colunas(leitura[i][0]),int(leitura[i][2]) - 1,str(leitura[i][5])]
             pos_preenchidas.append(aux)
+            nums_lidos += 1
+    return nums_lidos
         
 
 
 #Imprime a grade no terminal
-def montar_grade(pos_prenchidas):
+def montar_grade(pos_prenchidas,nums_inseridos):
     '''
     Parâmetros:
     pos_prenchidas (list): Lista de valores preenchidos na grade.
@@ -73,9 +76,11 @@ def montar_grade(pos_prenchidas):
             grade.append(list(linha1))
 
     grade.append(colunas)
+    
 
     #Insere os valores na grade
     for i in range(len(pos_prenchidas)):
+        
         if pos_preenchidas[i][0] < 3:
             x = int(pos_preenchidas[i][0])*4 + 4
         
@@ -87,7 +92,8 @@ def montar_grade(pos_prenchidas):
 
         y = pos_preenchidas[i][1]*2 + 2
 
-        grade[y][x] = str(pos_preenchidas[i][2])
+        if (i <= nums_inseridos):
+            grade[y][x] = "\033[31m" + str(pos_preenchidas[i][2]) +  "\033[0m"
 
            
     #Imprime a grade
@@ -101,13 +107,31 @@ def verifica_coluna():
     """Verifica se uma coluna não tem números repetidos."""
     pass
 
-def verifica_linha():
+def verifica_linha(pos_preenchidas):
     """Verifica se uma linha não tem números repetidos."""
-    pass
+    
+    #Percorre cada linha
+    for linha in range (9):
+        #uma lista não ordenada de valores vistos(conjunto)
+        val_vistos = set()
+        #vai percorrer todo o pos_preenchida e o item assume o valor da lista inserida no pos_preenchidas
+        for item in pos_preenchidas:
+            #verifica se o número da linha corresponde ao atual verificado no laço
+            if item[1] == linha:
+                valor = item[2]
+                #se o valor já estiver sido adicionado, a função retorna False
+                if valor in val_vistos:
+                    return False
+                
+                #Adiciona o valor ao conjunto val_vistos
+                val_vistos.add(valor)
+    return True
 
-def verifica_quadrante():
+def verifica_quadrante(pos_preenchidas):
     """Verifica se um quadrante 3x3 não tem números repetidos."""
+    
     pass
+        
 
 def md_solucionador():
     """Modo automático: resolver o Sudoku."""
@@ -117,8 +141,7 @@ def md_interativo():
     """Modo interativo: jogador joga manualmente no terminal."""
     pass
 
-
-
 pos_preenchidas = []
-leitor_txt(pos_preenchidas)
-montar_grade(pos_preenchidas)
+nums_lidos = leitor_txt(pos_preenchidas)
+montar_grade(pos_preenchidas,nums_lidos)
+
