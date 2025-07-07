@@ -25,7 +25,7 @@ Um pequeno projeto em Python que imprime, valida e (em breve) resolve quebra‑c
 ## 🚀 Como executar
 
 ```bash
-python sudoku.py
+python main.py
 ```
 
 1. O script carrega `arq_01_cfg.txt`.
