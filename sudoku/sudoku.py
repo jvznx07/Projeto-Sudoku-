@@ -1,6 +1,6 @@
 
 #Função que lê a coluna e converte uma letra em um inteiro de (0 a 8)
-def ler_colunas(coluna):
+def ler_valor(input):
     """
     Parâmetros:
     coluna (str): Letra da coluna.
@@ -8,6 +8,8 @@ def ler_colunas(coluna):
     Retorna:
     int: Índice correspondente da coluna.
     """
+    leitura = []
+
     colunas = {
         "A": 0,
         "B": 1,
@@ -19,8 +21,12 @@ def ler_colunas(coluna):
         "H": 7,
         "I": 8
     }
-    if str(coluna) in colunas:
-        return colunas[str(coluna)]
+    if str(input[0]) in colunas:
+        leitura.append(colunas[str(input[0])])
+    leitura.append(int(input[2]) - 1)
+    leitura.append(str(input[5]))
+
+    return leitura
 
 # Lê o arquivo e preenche a lista com posições iniciais do Sudoku
 def leitor_txt(pos_preenchidas):
@@ -46,7 +52,7 @@ def leitor_txt(pos_preenchidas):
 
         for i in range(len(leitura)):
             
-            aux = [ler_colunas(leitura[i][0]),int(leitura[i][2]) - 1,str(leitura[i][5])]
+            aux = ler_valor(leitura[i])
             pos_preenchidas.append(aux)
             nums_lidos += 1
     return nums_lidos
@@ -92,8 +98,11 @@ def montar_grade(pos_prenchidas,nums_inseridos):
 
         y = pos_preenchidas[i][1]*2 + 2
 
-        if (i <= nums_inseridos):
+        if (i < nums_inseridos):
             grade[y][x] = "\033[31m" + str(pos_preenchidas[i][2]) +  "\033[0m"
+
+        else:
+            grade[y][x] = str(pos_preenchidas[i][2])
 
            
     #Imprime a grade
@@ -103,11 +112,11 @@ def montar_grade(pos_prenchidas,nums_inseridos):
     
 
 # Funções a serem implementadas futuramente:
-def verifica_coluna():
+def verifica_colunas():
     """Verifica se uma coluna não tem números repetidos."""
     pass
 
-def verifica_linha(pos_preenchidas):
+def verifica_linhas(pos_preenchidas):
     """Verifica se uma linha não tem números repetidos."""
     
     #Percorre cada linha
@@ -132,6 +141,24 @@ def verifica_quadrante(pos_preenchidas):
     
     pass
         
+def val_possiveis(pos_check,pos_preenchidas):
+    num_possiveis = []
+
+    for i in range (1,10):
+        if (len(pos_check) < 3):
+            pos_check.append(i)
+        else:
+            pos_check[2] = str(i)
+        
+        pos_preenchidas.append(pos_check)
+        if (verifica_linhas(pos_preenchidas)):
+            num_possiveis.append(i)
+
+        pos_preenchidas.pop()
+        
+
+    return num_possiveis
+
 
 def md_solucionador():
     """Modo automático: resolver o Sudoku."""
@@ -139,9 +166,13 @@ def md_solucionador():
 
 def md_interativo():
     """Modo interativo: jogador joga manualmente no terminal."""
+
     pass
 
-pos_preenchidas = []
-nums_lidos = leitor_txt(pos_preenchidas)
-montar_grade(pos_preenchidas,nums_lidos)
 
+pos_preenchidas = []
+def main():
+    nums_lidos = leitor_txt(pos_preenchidas)
+    montar_grade(pos_preenchidas,nums_lidos)
+
+main()
