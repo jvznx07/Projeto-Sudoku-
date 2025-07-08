@@ -1,7 +1,7 @@
 # Funções a serem implementadas futuramente:
-def verifica_colunas():
+def verifica_colunas(pos_preenchidas):
     """Verifica se uma coluna não tem números repetidos."""
-    pass
+    return True
 
 
 def verifica_linhas(pos_preenchidas):
@@ -28,7 +28,7 @@ def verifica_linhas(pos_preenchidas):
 def verifica_quadrante(pos_preenchidas):
     """Verifica se um quadrante 3x3 não tem números repetidos."""
 
-    pass
+    return True
 
 
 def val_possiveis(pos_check, pos_preenchidas):
