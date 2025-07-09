@@ -39,7 +39,7 @@ def montar_grade(pos_prenchidas, nums_inseridos):
 
         y = pos_preenchidas[i][1] * 2 + 2
 
-        if (i < nums_inseridos):
+        if i < nums_inseridos:
             grade[y][x] = "\033[31m" + str(pos_preenchidas[i][2]) + "\033[0m"
 
         else:

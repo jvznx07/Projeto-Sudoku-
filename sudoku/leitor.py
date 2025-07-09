@@ -1,3 +1,5 @@
+from verificadores import verif_entrada
+
 def ler_valor(input):
     """
     Parâmetros:
@@ -50,8 +52,12 @@ def leitor_txt(pos_preenchidas):
 
         for i in range(len(leitura)):
             aux = ler_valor(leitura[i])
-            pos_preenchidas.append(aux)
-            nums_lidos += 1
+            if verif_entrada(leitura[i]):
+                pos_preenchidas.append(aux)
+                nums_lidos += 1
+            else:
+                print(f"Erro na leitura da linha {i}")
+
     return nums_lidos
 
 

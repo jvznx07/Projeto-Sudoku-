@@ -47,3 +47,20 @@ def val_possiveis(pos_check, pos_preenchidas):
         pos_preenchidas.pop()
 
     return num_possiveis
+
+def verif_entrada(entrada):
+    """Vai verificar a entrada no modo interativo e no arquivo base txt
+    inserido, se a entrada for inválida, ela retorna False e se for váalida retorna True"""
+
+    colunas = set(("A", "B", "C", "D", "E", "F", "G", "H", "I"))
+    linhas = set(("1", "2", "3", "4", "5", "6", "7", "8", "9"))
+
+
+    if len(entrada) == 6:
+        if entrada[0] in colunas and entrada[2] in linhas and entrada[5] in linhas:
+            return True
+        else:
+            return False
+    else:
+        return False
+
