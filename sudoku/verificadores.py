@@ -42,25 +42,29 @@ def verifica_linhas(pos_preenchidas):
 
 
 def verifica_quadrante(pos_preenchidas):
-    inicio_linha = (pos_preenchidas[1] // 3) * 3
-    inicio_coluna = (pos_preenchidas[0] // 3) * 3
+"""Verifica se um quadrante 3x3 não tem números repetidos."""
 
-    for i in range(inicio_linha, inicio_linha + 3):
-        for j in range(inicio_coluna, inicio_coluna + 3):
-            if pos_preenchidas[i][j] == pos_preenchidas[3]:
-                return True
-
-    
-    
-    
-    
-    
-    
-    
-    
-    """Verifica se um quadrante 3x3 não tem números repetidos."""
-
-    return False
+     # Percorre os blocos de linhas que formam o topo de cada quadrante (0, 3, 6)
+    for q_linha in range(0,9,3):
+         # Percorre os blocos de colunas que formam o lado esquerdo de cada quadrante (0, 3, 6)
+        for q_coluna in range(0,9,3):
+             # Cria um conjunto para registrar os valores já vistos no quadrante atual
+            vistos = set()
+            # Para cada posição preenchida no Sudoku
+            for item in pos_preenchidas:
+                col, lin, val = item # col = coluna, lin = linha, val = valor inserido
+                
+                
+                # Verifica se a posição está dentro do quadrante atual
+                if q_coluna <= col < q_coluna + 3 and q_linha <= lin < q_linha + 3:
+                      # Se o valor já foi visto nesse quadrante, é duplicado → inválido
+                    if val in vistos:
+                        return False
+                    
+                     # Caso contrário, adiciona o valor ao conjunto de vistos
+                    vistos.add(val)
+     # Se todos os quadrantes foram validados sem repetição, retorna True
+    return True
 
 
 def val_possiveis(pos_check, pos_preenchidas):
