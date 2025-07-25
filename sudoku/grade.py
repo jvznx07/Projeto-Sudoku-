@@ -1,8 +1,4 @@
-from dados import rt_pos_preenchidas, rt_nums_lidos
-
-pos_preenchidas = rt_pos_preenchidas()
-nums_lidos = rt_nums_lidos()
-def montar_grade(pos_prenchidas, nums_inseridos):
+def montar_grade(pos_preenchidas, nums_inseridos):
     '''
     Parâmetros:
     pos_prenchidas (list): Lista de valores preenchidos na grade.
@@ -26,7 +22,7 @@ def montar_grade(pos_prenchidas, nums_inseridos):
     grade.append(colunas)
 
     # Insere os valores na grade
-    for i in range(len(pos_prenchidas)):
+    for i in range(len(pos_preenchidas)):
 
         if pos_preenchidas[i][0] < 3:
             x = int(pos_preenchidas[i][0]) * 4 + 4

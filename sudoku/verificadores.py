@@ -1,5 +1,5 @@
-# Funções a serem implementadas futuramente:
 def verifica_colunas(pos_preenchidas):
+    """Verifica se uma coluna não tem números repetidos."""
     # Percorre cada coluna
     for coluna in range(9):
         # uma lista não ordenada de valores vistos(conjunto)
@@ -15,10 +15,8 @@ def verifica_colunas(pos_preenchidas):
                 
                 # Adiciona o valor ao conjunto val_vistos
                 val_vistos.add(valor)    
-    
-    """Verifica se uma coluna não tem números repetidos."""
-    return True
 
+    return True
 
 def verifica_linhas(pos_preenchidas):
     """Verifica se uma linha não tem números repetidos."""
@@ -42,61 +40,49 @@ def verifica_linhas(pos_preenchidas):
 
 
 def verifica_quadrante(pos_preenchidas):
-"""Verifica se um quadrante 3x3 não tem números repetidos."""
+    """Verifica se um quadrante 3x3 não tem números repetidos."""
 
-     # Percorre os blocos de linhas que formam o topo de cada quadrante (0, 3, 6)
-    for q_linha in range(0,9,3):
-         # Percorre os blocos de colunas que formam o lado esquerdo de cada quadrante (0, 3, 6)
-        for q_coluna in range(0,9,3):
-             # Cria um conjunto para registrar os valores já vistos no quadrante atual
+    # Percorre os blocos de linhas que formam o topo de cada quadrante (0, 3, 6)
+    for q_linha in range(0, 9, 3):
+        # Percorre os blocos de colunas que formam o lado esquerdo de cada quadrante (0, 3, 6)
+        for q_coluna in range(0, 9, 3):
+            # Cria um conjunto para registrar os valores já vistos no quadrante atual
             vistos = set()
             # Para cada posição preenchida no Sudoku
             for item in pos_preenchidas:
-                col, lin, val = item # col = coluna, lin = linha, val = valor inserido
-                
-                
+                col, lin, val = item  # col = coluna, lin = linha, val = valor inserido
+
                 # Verifica se a posição está dentro do quadrante atual
                 if q_coluna <= col < q_coluna + 3 and q_linha <= lin < q_linha + 3:
-                      # Se o valor já foi visto nesse quadrante, é duplicado → inválido
+                    # Se o valor já foi visto nesse quadrante, é duplicado → inválido
                     if val in vistos:
                         return False
-                    
-                     # Caso contrário, adiciona o valor ao conjunto de vistos
-                    vistos.add(val)
-     # Se todos os quadrantes foram validados sem repetição, retorna True
-    return True
 
+                    # Caso contrário, adiciona o valor ao conjunto de vistos
+                    vistos.add(val)
+    # Se todos os quadrantes foram validados sem repetição, retorna True
+    return True
 
 def val_possiveis(pos_check, pos_preenchidas):
     num_possiveis = []
+    val_in_pos = False
 
-    for i in range(1, 10):
-        if (len(pos_check) < 3):
-            pos_check.append(i)
-        else:
-            pos_check[2] = str(i)
+    for item in pos_preenchidas:
+        if(item[0] == pos_check[0] and item[1] == pos_check[1]):
+            val_in_pos = True
+    if not val_in_pos:
+        for i in range(1, 10):
 
-        pos_preenchidas.append(pos_check)
-        if (verifica_linhas(pos_preenchidas)):
-            num_possiveis.append(i)
+            if (len(pos_check) < 3):
+                pos_check.append(str(i))
+            else:
+                pos_check[2] = str(i)
 
-        pos_preenchidas.pop()
+            pos_preenchidas.append(pos_check)
+            if (verifica_linhas(pos_preenchidas) and verifica_colunas(pos_preenchidas) and verifica_quadrante(pos_preenchidas)):
+                num_possiveis.append(str(i))
+
+            pos_preenchidas.pop()
 
     return num_possiveis
-
-def verif_entrada(entrada):
-    """Vai verificar a entrada no modo interativo e no arquivo base txt
-    inserido, se a entrada for inválida, ela retorna False e se for váalida retorna True"""
-
-    colunas = set(("A", "B", "C", "D", "E", "F", "G", "H", "I"))
-    linhas = set(("1", "2", "3", "4", "5", "6", "7", "8", "9"))
-
-
-    if len(entrada) == 6:
-        if entrada[0] in colunas and entrada[2] in linhas and entrada[5] in linhas:
-            return True
-        else:
-            return False
-    else:
-        return False
 
