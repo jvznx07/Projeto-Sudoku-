@@ -91,7 +91,7 @@ def leitor_txt(pos_preenchidas,nome_arquivo):
                     pos_preenchidas.append(ler_valor(leitura))
                     nums_lidos += 1
 
-                elif not verif_entrada(leitura[i]):
+                elif not verif_entrada(leitura):
                     return nums_lidos, 1
 
     except FileNotFoundError:

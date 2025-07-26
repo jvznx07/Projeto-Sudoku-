@@ -6,14 +6,19 @@ from leitor import *
 def md_solucionador(pos_preenchidas,nums_lidos):
     """Modo automático: resolver o Sudoku."""
     num_possiveis = []
-    while len(pos_preenchidas) < 81:
+    determin = True
+    while len(pos_preenchidas) < 81 and determin:
+        determin = False
         for coluna in range(9):
             for linha in range(9):
                 num_possiveis = val_possiveis([coluna,linha], pos_preenchidas)
                 if(len(num_possiveis) == 1 and [coluna, linha, num_possiveis[0]] not in pos_preenchidas):
                     pos_preenchidas.append([coluna, linha, num_possiveis[0]])
-
+                    determin = True
+        
     montar_grade(pos_preenchidas, nums_lidos)
+    if not determin:
+        print("\nNão é possível prosseguir com a resolução, quantidade de pistas insuficientes.")
 
 
 def md_interativo(pos_preenchidas, nums_lidos):
