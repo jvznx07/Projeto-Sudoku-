@@ -1,4 +1,12 @@
+"""
+Aluno 1: Arthur Rodrigues Fernandes | Matrícula: 580801
+Aluno 2: João Victor Alves Aprigio | Matrícula: 582694
+"""
+
 def remove_espac(entrada):
+    """
+    Remove os espaços da entrada
+    """
     saida = []
     for i in range(len(entrada)):
 
@@ -8,8 +16,10 @@ def remove_espac(entrada):
     return "".join(saida)
 
 def verif_entrada(entrada):
-    """Vai verificar a entrada no modo interativo e no arquivo base txt
-    inserido, se a entrada for inválida, ela retorna False e se for váalida retorna True"""
+    """
+    Vai verificar a entrada no modo interativo e no arquivo base txt
+    inserido, se a entrada for inválida, ela retorna False e se for váalida retorna True
+    """
     verif = remove_espac(entrada)
 
     colunas = set(["A", "B", "C", "D", "E", "F", "G", "H", "I"])
@@ -38,11 +48,16 @@ def verif_entrada(entrada):
 
 def ler_valor(entrada):
     """
+    Lê a entrada como uma string e retorna uma lista com posições e valores correspondentes.
+
     Parâmetros:
-    coluna (str): Letra da coluna.
+    uma estring indicando a posição 
+    exemplo: 'A,1: 1'
 
     Retorna:
-    int: Índice correspondente da coluna.
+    uma lista com a posição da coluna e linha, ou
+    se for no formato de inserir valor na grade, ela retorna uma lista
+    com coluna, linha e valor inserido.
     """
 
     entrada = remove_espac(entrada)
@@ -60,6 +75,7 @@ def ler_valor(entrada):
         "I": 8
     }
 
+    #Verifica se a entrada se trata de um valor inserido, dica ou remover valor
     if entrada[0] == "?" or entrada[0] == "!":
         leitura.append(colunas[(str(entrada[1]).upper())])
         leitura.append(int(entrada[3]) - 1)
@@ -72,12 +88,18 @@ def ler_valor(entrada):
     return leitura
 
 
-
-# Lê o arquivo e preenche a lista com posições iniciais do Sudoku
 def leitor_txt(pos_preenchidas,nome_arquivo):
     """
     Lê o arquivo 'arq_01_cfg.txt' e preenche a lista `pos_preenchidas`
     com os valores de entrada do Sudoku.
+
+    Parâmetros:
+    A matriz que será preenchida -> pos_preenchidas;
+    O nome do arquivo.
+
+    Retorna:
+    o número de valores lidos -> nums_lidos;
+    um valor de erro, 0 se não tem erros, 1 se tem erro.
     """
 
     nums_lidos = 0
@@ -101,6 +123,18 @@ def leitor_txt(pos_preenchidas,nome_arquivo):
     return nums_lidos, 0
 
 def leitor_md_batch(arq_cfg, arq_jog, leitura_batch):
+    """
+    Função para a leitura caso o código seja executado em modo batch.
+
+    Parâmetros:
+    arq_cfg -> nome do arquivo de pistas.
+    arq_jog -> nome do arquivo de jogadas.
+    leitura_batch -> lista para preencher após a leitura
+
+    Retorna:
+    nums_lidos -> número de valores lido no arquivo de pistas.
+    um código de erro, 0 se não tem erro, 1 se tem erro na leitura.
+    """
     nums_lidos = 0
     erro_leitura = 0
     valores_ivalidos = False

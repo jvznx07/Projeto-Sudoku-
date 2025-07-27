@@ -1,7 +1,14 @@
+"""
+Aluno 1: Arthur Rodrigues Fernandes | Matrícula: 580801
+Aluno 2: João Victor Alves Aprigio | Matrícula: 582694
+"""
+
 def montar_grade(pos_preenchidas, nums_inseridos):
     '''
     Parâmetros:
-    pos_prenchidas (list): Lista de valores preenchidos na grade.
+    pos_prenchidas (matriz): Lista de valores preenchidos na grade.
+    num_inseridos: numeros lidos no arquivo de pistas para
+    pinta-los de vermelho no terminal.
     '''
 
     colunas = "    A   B   C    D   E   F    G   H   I   "

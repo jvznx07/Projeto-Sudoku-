@@ -1,9 +1,14 @@
+"""
+Aluno 1: Arthur Rodrigues Fernandes | Matrícula: 580801
+Aluno 2: João Victor Alves Aprigio | Matrícula: 582694
+"""
+
 from modos import *
 from grade import montar_grade
 from leitor import *
 import sys
 
-pos_preenchidas = []
+pos_preenchidas = [] #Matiz que armazena as jogadas válidas
 leitura_batch = []
 
 #Verificações para saber o número de argumentos passados no terminal
@@ -20,7 +25,10 @@ elif len(sys.argv) == 3:
 
 
 def main():
-
+    """
+    Função principal, nela é feita a verificação do arquivo de pistas e 
+    a escolha entre o modo interativo e modo batch.
+    """
 
     print("<------------------SUDOKU------------------>\n")
     montar_grade(pos_preenchidas,nums_lidos)
@@ -64,6 +72,7 @@ def main():
 
 if __name__ == "__main__":
     if md_batch_atv:
+        #execução do modo batch
         md_batch(pos_preenchidas,nums_lidos,leitura_batch)
         if len(pos_preenchidas) == 81:
             print("A grade foi preenchida com sucesso!")
@@ -72,4 +81,5 @@ if __name__ == "__main__":
             print("A grade não foi preenchida!")
 
     else:
+        #execução do modo solucionador ou interativo
         main()

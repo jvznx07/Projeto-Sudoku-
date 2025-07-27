@@ -1,3 +1,8 @@
+"""
+Aluno 1: Arthur Rodrigues Fernandes | Matrícula: 580801
+Aluno 2: João Victor Alves Aprigio | Matrícula: 582694
+"""
+
 def verifica_colunas(pos_preenchidas):
     """Verifica se uma coluna não tem números repetidos."""
     # Percorre cada coluna
